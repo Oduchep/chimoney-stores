@@ -3,7 +3,12 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React, { useEffect, useMemo, useState } from 'react';
 import { toast } from 'react-toastify';
-import { Counter, ImageShowcase, ProductCard } from '../../components';
+import {
+  Counter,
+  ImageShowcase,
+  ProductCard,
+  ProductCardSkeleton,
+} from '../../components';
 import { getProductsByCategory, getSingleProduct } from '../../features';
 import {
   triggerUpdateStore,
@@ -11,6 +16,7 @@ import {
 } from '../../utils/helpers';
 
 const ProductId = () => {
+  const skeletonCount = [1, 2, 3, 4, 5, 6, 7, 8];
   const { query } = useRouter();
   const { id } = query;
 
@@ -67,8 +73,10 @@ const ProductId = () => {
     setStore(JSON.parse(stored) || []);
   }, []);
 
+  console.log(count);
+
   const decreaseCount = () => {
-    if (count === 0) {
+    if (count === 1) {
       return;
     } else {
       setCount(count - 1);
@@ -132,7 +140,7 @@ const ProductId = () => {
             {checkerValue?.length > 0 ? (
               <div className="mb-4">
                 <Counter
-                  count={checkerValue?.[0].count || count}
+                  count={checkerValue?.[0]?.count || count}
                   decreaseCount={decreaseCount}
                   increaseCount={increaseCount}
                 />
@@ -155,9 +163,13 @@ const ProductId = () => {
             Products for {category}
           </h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-16">
-            {storeCategoryProducts?.map((item) => (
-              <ProductCard key={item?.id} item={item} />
-            ))}
+            {categoryLoading
+              ? skeletonCount?.map((skeleton, i) => (
+                  <ProductCardSkeleton key={i} />
+                ))
+              : storeCategoryProducts?.map((item) => (
+                  <ProductCard key={item?.id} item={item} />
+                ))}
           </div>
         </div>
       </div>

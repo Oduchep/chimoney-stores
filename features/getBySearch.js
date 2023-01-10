@@ -1,9 +1,9 @@
 import axios from 'axios';
 
-const getAllProducts = async ({ limit }) => {
+const getBySearch = async ({ searchSlug }) => {
   try {
     const response = await axios.get(
-      `https://dummyjson.com/products${limit && `?limit=${limit}`}`,
+      `https://dummyjson.com/products/search?q=${searchSlug}`,
     );
 
     if (response.status === 200) {
@@ -14,4 +14,4 @@ const getAllProducts = async ({ limit }) => {
   }
 };
 
-export default getAllProducts;
+export default getBySearch;
