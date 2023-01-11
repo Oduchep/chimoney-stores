@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React, { useEffect, useMemo, useState } from 'react';
+import ReactStars from 'react-stars';
 import { toast } from 'react-toastify';
 import {
   Counter,
@@ -73,8 +74,6 @@ const ProductId = () => {
     setStore(JSON.parse(stored) || []);
   }, []);
 
-  console.log(count);
-
   const decreaseCount = () => {
     if (count === 1) {
       return;
@@ -114,7 +113,7 @@ const ProductId = () => {
         <div className="mb-20 lg:grid grid-cols-12 gap-10">
           <div className="p-5 mb-10 lg:mb-0 lg:col-span-7 shadow">
             <h1 className="text-xl font-semibold">{singleProduct?.title}</h1>
-            <ImageShowcase gallery={gallery} />
+            <ImageShowcase gallery={gallery} loading={productLoading} />
           </div>
 
           <div className="h-fit p-5 lg:col-span-5 shadow">
@@ -126,6 +125,16 @@ const ProductId = () => {
             <div className="mb-4">
               <div className="text-lg font-semibold"> Description</div>
               <div>{singleProduct?.description}</div>
+            </div>
+
+            <div className="mb-4">
+              <ReactStars
+                count={5}
+                value={singleProduct?.rating}
+                size={20}
+                edit={false}
+                color2={'#ffd700'}
+              />
             </div>
 
             <div className="mb-4">

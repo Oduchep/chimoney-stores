@@ -7,7 +7,7 @@ const DefaultLayout = ({ children }) => {
     <div>
       <Navbar />
 
-      <main className="px-4 md:px-8 py-8">{children}</main>
+      <main className="px-4 md:px-8 py-8 mt-20">{children}</main>
     </div>
   );
 };
