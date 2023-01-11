@@ -4,8 +4,8 @@ import ReactStars from 'react-stars';
 const CartCardSkeleton = () => {
   return (
     <div className="shadow rounded-md p-4 w-full mx-auto">
-      <div className="animate-pulse flex">
-        <div className="h-48 w-48 bg-gray-300"></div>
+      <div className="animate-pulse md:flex">
+        <div className="h-48 md:w-48 bg-gray-300"></div>
         <div className="flex-1 m-4">
           <div className="h-3 w-1/2 bg-gray-300 rounded mb-2"></div>
 
