@@ -1,20 +1,24 @@
 import Image from 'next/image';
 import React, { useState } from 'react';
 
-const ImageShowcase = ({ gallery }) => {
+const ImageShowcase = ({ gallery, loading }) => {
   const [currentImg, setCurrentImg] = useState();
 
   return (
     <div className="py-4 md:px-4">
-      <div className="h-56 md:h-80 overflow-y-hidden">
-        <Image
-          src={currentImg || gallery?.[0]}
-          width={320}
-          height={320}
-          className="mx-auto"
-          alt="pic"
-        />
-      </div>
+      {loading ? (
+        <div className="h-56 md:h-80 md:w-80 bg-gray-300 mx-auto"></div>
+      ) : (
+        <div className="h-56 md:h-80 overflow-y-hidden">
+          <Image
+            src={currentImg || gallery?.[0]}
+            width={320}
+            height={320}
+            className="mx-auto"
+            alt="pic"
+          />
+        </div>
+      )}
 
       <div className={`mt-10 md:px-5 flex items-center justify-center`}>
         {gallery?.map((image, i) => (
