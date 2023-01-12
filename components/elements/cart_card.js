@@ -80,11 +80,14 @@ const CartCard = ({
       const newCheckout = checkoutList.filter(
         (product) => product?.id !== item?.id,
       );
+
       setCheckoutList(newCheckout);
+      sumCheckoutlist(newCheckout);
     } else {
-      setCheckoutList([...checkoutList, item]);
+      const newCheckout = [...checkoutList, item];
+      setCheckoutList(newCheckout);
+      sumCheckoutlist(newCheckout);
     }
-    sumCheckoutlist();
   };
 
   return (
