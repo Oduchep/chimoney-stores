@@ -157,8 +157,13 @@ const ProductId = () => {
             ) : (
               <div className="mt-10 flex justify-center">
                 <button
-                  className="py-[10px] px-10 bg-pink-500 hover:bg-pink-700 text-white uppercase transition-all ease-in-out duration-500 rounded"
+                  className={`${
+                    productLoading
+                      ? 'bg-pink-500/60'
+                      : 'bg-pink-500 hover:bg-pink-700'
+                  } py-[10px] px-10 text-white uppercase transition-all ease-in-out duration-500 rounded`}
                   onClick={addToCart}
+                  disabled={productLoading}
                 >
                   Add to cart
                 </button>
