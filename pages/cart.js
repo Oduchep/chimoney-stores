@@ -81,7 +81,7 @@ const Cart = () => {
 
     setCheckoutData({
       itemCount: count,
-      sumTotal: sum,
+      sumTotal: sum * count,
     });
   };
 

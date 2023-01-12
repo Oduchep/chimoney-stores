@@ -44,7 +44,7 @@ const CartCard = ({
         count: cartItem?.[0]?.count - 1,
       };
 
-      setCart([...newCart, updatedCartItem]);
+      setCart([updatedCartItem, ...newCart]);
 
       triggerUpdateStoreCount(store, updateDecrement);
       triggerUpdateStore(setStore);
@@ -63,7 +63,7 @@ const CartCard = ({
       count: cartItem?.[0]?.count + 1,
     };
 
-    setCart([...newCart, updatedCartItem]);
+    setCart([updatedCartItem, ...newCart]);
 
     triggerUpdateStoreCount(store, updateIncrement);
     triggerUpdateStore(setStore);
