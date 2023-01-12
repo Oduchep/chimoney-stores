@@ -44,7 +44,7 @@ const CartCard = ({
         count: cartItem?.[0]?.count - 1,
       };
 
-      setCart([...newCart, updatedCartItem]);
+      setCart([updatedCartItem, ...newCart]);
 
       triggerUpdateStoreCount(store, updateDecrement);
       triggerUpdateStore(setStore);
@@ -63,7 +63,7 @@ const CartCard = ({
       count: cartItem?.[0]?.count + 1,
     };
 
-    setCart([...newCart, updatedCartItem]);
+    setCart([updatedCartItem, ...newCart]);
 
     triggerUpdateStoreCount(store, updateIncrement);
     triggerUpdateStore(setStore);
@@ -80,11 +80,14 @@ const CartCard = ({
       const newCheckout = checkoutList.filter(
         (product) => product?.id !== item?.id,
       );
+
       setCheckoutList(newCheckout);
+      sumCheckoutlist(newCheckout);
     } else {
-      setCheckoutList([...checkoutList, item]);
+      const newCheckout = [...checkoutList, item];
+      setCheckoutList(newCheckout);
+      sumCheckoutlist(newCheckout);
     }
-    sumCheckoutlist();
   };
 
   return (

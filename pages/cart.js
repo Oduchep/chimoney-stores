@@ -53,6 +53,10 @@ const Cart = () => {
     const updatedStore = store?.filter((product) => Number(product?.id) !== id);
     // delete from cart list
     const updatedCart = cart?.filter((product) => Number(product?.id) !== id);
+    // delete from checkout list
+    const updatedCheckoutList = checkoutList?.filter(
+      (product) => Number(product?.id) !== id,
+    );
 
     // update local storage
     localStorage.setItem('store-data', JSON.stringify(updatedStore));
@@ -60,23 +64,25 @@ const Cart = () => {
     // update cart list
     setCart(updatedCart);
 
+    // update checkout list
+    setCheckoutList(updatedCheckoutList);
+
     toast.success('Item removed from cart');
   };
 
-  const sumCheckoutlist = () => {
+  const sumCheckoutlist = (arrayList) => {
     let count = 0;
     let sum = 0;
-    for (let item of checkoutList) {
-      console.log(sum, count);
+
+    for (let item of arrayList) {
       count = count + item?.count;
       sum = sum + item?.price;
     }
+
     setCheckoutData({
       itemCount: count,
-      sumTotal: sum,
+      sumTotal: sum * count,
     });
-
-    console.log(sum, count);
   };
 
   return (
@@ -133,7 +139,14 @@ const Cart = () => {
                   </span>
                 </div>
                 <div className="flex justify-center">
-                  <button className="bg-pink-500 hover:bg-pink-700 py-2 px-5 text-white rounded transition-all ease-in-out duration-500">
+                  <button
+                    className={`${
+                      checkoutList?.length < 1
+                        ? 'bg-pink-500/60'
+                        : 'bg-pink-500 hover:bg-pink-700'
+                    } py-2 px-5 text-white rounded transition-all ease-in-out duration-500`}
+                    disabled={checkoutList?.length < 1}
+                  >
                     Proceed to checkout
                   </button>
                 </div>
