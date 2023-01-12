@@ -93,7 +93,7 @@ const CartCard = ({
         <input
           type="checkbox"
           checked={itemChecked}
-          onChange={addToCheckout}
+          onChange={() => addToCheckout()}
           className="w-4 h-4 cursor-pointer bg-white text-pink-500 accent-pink-500  rounded"
         />
       </div>
